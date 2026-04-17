@@ -1,0 +1,403 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../lib/i18n';
+
+// Get language from URL parameter, default to en-US
+const urlLang = Astro.url.searchParams.get('lang');
+const lang = (urlLang === 'es' ? 'es' : 'en-US') as 'en-US' | 'es';
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={String(t('splash.title'))} lang={lang}>
+  <div id="app-container" data-lang={lang}>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen">
+      <section class="inner">
+        <h1 class="display-2">{t('splash.title')}</h1>
+        <p class="lead">{t('splash.subtitle')}</p>
+        <p class="lead">
+          <a href="#" class="btn-new-case btn btn-lg btn-splash-new">{t('splash.new')}</a>
+          <a href="#" class="btn-load-case btn btn-lg btn-splash-load">{t('splash.open')}</a>
+        </p>
+      </section>
+    </div>
+
+    <!-- Scoring Screen -->
+    <div id="scoring-screen" class="screen" style="display:none;">
+      <section>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light d-print-none">
+          <ul id="scoring-tabs" class="nav nav-tabs mr-auto" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a id="tab-case-info" data-toggle="tab" href="#tab-pane-case-info" role="tab" 
+                 aria-controls="tab-pane-case-info" aria-selected="true" class="nav-link active">
+                {t('tabs.case')}
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a id="tab-scoring-info" data-toggle="tab" href="#tab-pane-scoring-info" role="tab" 
+                 aria-controls="tab-pane-scoring-info" aria-selected="false" class="nav-link">
+                {t('tabs.scoring')}
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a id="tab-review-info" data-toggle="tab" href="#tab-pane-review-info" role="tab" 
+                 aria-controls="tab-pane-review-info" aria-selected="false" class="nav-link">
+                {t('tabs.review')}
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a id="tab-results-info" data-toggle="tab" href="#tab-pane-results-info" role="tab" 
+                 aria-controls="tab-pane-results-info" aria-selected="false" class="nav-link">
+                {t('tabs.results')}
+              </a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <strong>{t('tabs.file')}</strong><span id="current-file"></span>
+          </span>
+        </nav>
+
+        <div class="tab-content py-2">
+          <!-- Case Info Tab -->
+          <section id="tab-pane-case-info" class="tab-pane active" role="tabpanel" aria-labelledby="tab-case-info">
+            <div class="card mb-2">
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="case_number_input" class="bmd-label-floating">{t('caseinfo.number-label')}</label>
+                    <input type="text" id="case_number_input" class="form-control" />
+                    <span class="bmd-help">{t('caseinfo.number-text')}</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="observation_date_input" class="bmd-label-floating">{t('caseinfo.date-label')}</label>
+                    <input type="text" id="observation_date_input" class="form-control" />
+                    <span class="bmd-help">{t('caseinfo.date-text')}</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="analyst_input" class="bmd-label-floating">{t('caseinfo.analyst-label')}</label>
+                    <input type="text" id="analyst_input" class="form-control" />
+                    <span class="bmd-help">{t('caseinfo.analyst-text')}</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="memo_input" class="bmd-label-floating">{t('caseinfo.memo-label')}</label>
+                    <textarea id="memo_input" class="form-control" rows="10"></textarea>
+                    <span class="bmd-help">{t('caseinfo.memo-text')}</span>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <p class="text-center">
+              <button class="scoring-button btn btn-outline-success active">{t('caseinfo.scoring-button')}</button>
+            </p>
+          </section>
+
+          <!-- Scoring Tab -->
+          <section id="tab-pane-scoring-info" class="tab-pane" role="tabpanel" aria-labelledby="tab-scoring-info">
+            <div class="row mb-2">
+              <div class="col-sm-6 col-md-5 col-lg-4">
+                <div id="chart-card" class="card mb-2">
+                  <div class="card-body">
+                    <div class="text-center mb-2">
+                      <div id="tooth-chart-selection">
+                        <ul class="nav justify-content-center">
+                          <li class="nav-item">
+                            <a href="#" role="button" class="btn-tooth-chart nav-link" data-chart="permanent">
+                              {t('scoring.permanent')}
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" role="button" class="btn-tooth-chart nav-link" data-chart="deciduous">
+                              {t('scoring.deciduous')}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <div id="tc-permanent-maxillary" class="tooth-chart" style="display:none;"></div>
+                      <div id="tc-permanent-mandibular" class="tooth-chart" style="display:none;"></div>
+                      <div id="tc-deciduous-maxillary" class="tooth-chart" style="display:none;"></div>
+                      <div id="tc-deciduous-mandibular" class="tooth-chart" style="display:none;"></div>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-center">
+                  <button class="case-button btn btn-outline-secondary">{t('scoring.case-button')}</button>
+                  <button class="review-button btn btn-outline-success active">{t('scoring.review-button')}</button>
+                </p>
+              </div>
+              <div class="col-sm-6 col-md-7 col-lg-8">
+                <div id="analysis-card" class="card mb-2">
+                  <div class="card-body">
+                    <div class="alert alert-info show" role="alert">{t('scoring.select-tooth')}</div>
+                    <div id="tooth-scoring" style="display:none;">
+                      <div class="row">
+                        <div class="col">
+                          <h4 class="mb-1"><span id="tooth-name"></span></h4>
+                          <p><span id="tooth-jawside"></span></p>
+                        </div>
+                        <div class="col text-right">
+                          <input type="hidden" id="tooth-score-id" />
+                          <span id="tooth-score-text"></span>
+                        </div>
+                      </div>
+                      <div id="tooth-scoring-help" class="row"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Review Tab -->
+          <section id="tab-pane-review-info" class="tab-pane" role="tabpanel" aria-labelledby="tab-review-info">
+            <div class="row mb-2">
+              <div class="col-sm-8">
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <h3>{t('review.title')}</h3>
+                    <div class="table-responsive">
+                      <table id="scores-table" class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>{t('review.tooth')}</th>
+                            <th>{t('review.set')}</th>
+                            <th>{t('review.jaw')}</th>
+                            <th>{t('review.side')}</th>
+                            <th>{t('review.name')}</th>
+                            <th class="text-right">{t('review.score')}</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-center">
+                  <button class="reset-button btn btn-outline-danger">{t('review.reset-button')}</button>
+                  <button class="reset-all-button btn btn-outline-danger">{t('review.reset-all-button')}</button>
+                </p>
+                <p class="text-center">
+                  <button class="analyze-button btn btn-outline-success active">{t('review.analyze-button')}</button>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Results Tab -->
+          <section id="tab-pane-results-info" class="tab-pane" role="tabpanel" aria-labelledby="tab-results-info">
+            <div class="row mb-2">
+              <div class="col-sm-12 mb-5">
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <h3>{t('results.title')}</h3>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p><strong>{t('results.case-number')}</strong> <span id="results-case-number"></span></p>
+                        <p><strong>{t('results.observation-date')}</strong> <span id="results-observation-date"></span></p>
+                        <p><strong>{t('results.analyst')}</strong> <span id="results-analyst"></span></p>
+                      </div>
+                      <div class="col-sm-6">
+                        <table id="results-score-table" class="table table-sm">
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5>{t('results.prediction')}</h5>
+                        <p class="display-4"><span id="results-prediction"></span></p>
+                        <!-- <div class="form-group">
+                          <label for="prediction-perc">{t('results.confidence')}</label>
+                          <select id="prediction-perc" class="form-control">
+                            <option value="90">90%</option>
+                            <option value="95" selected>95%</option>
+                            <option value="99">99%</option>
+                          </select>
+                        </div>
+                        <p>
+                          <strong>{t('results.range')}</strong>
+                          <span id="results-lower"></span> - <span id="results-upper"></span> {t('results.years')}
+                        </p> -->
+                      </div>
+                      <div class="col-sm-6">
+                        <h5>{t('results.statistics')}</h5>
+                        <div class="form-group">
+                          <label for="results-mu">{t('results.mu')}</label>
+                          <input type="text" id="results-mu" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                          <label for="results-w">{t('results.within')}</label>
+                          <input type="text" id="results-w" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                          <label for="results-b">{t('results.between')}</label>
+                          <input type="text" id="results-b" class="form-control" readonly />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h5>{t('results.prediction-table')}</h5>
+                        <table id="results-prediction-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>{t('results.confidence')}</th>
+                              <th>{t('results.lower')}</th>
+                              <th>{t('results.upper')}</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody> 
+                        </table>
+                      </div>
+                    </div>
+
+                    <div id="results-images" class="row"></div>
+                  </div>
+                </div>
+
+                <p class="text-center d-print-none">
+                  <button class="export-pdf-button btn btn-outline-primary">{t('results.export-pdf')}</button>
+                </p>
+
+                <div class="d-none d-print-block">
+                  <p class="text-center">
+                    <small>{t('results.exported-on')}: <span id="results-export-on"></span></small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="spinner" style="display:none;">
+      <div class="spinner-backdrop"></div>
+      <div class="spinner-content">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <p></p>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="settings-modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-modal-label">{t('settings.title')}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <h6>{t('settings.language.title')}</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_language" id="settings_language_en" value="en-US">
+                <label class="form-check-label" for="settings_language_en">
+                  {t('settings.language.english')}
+                </label>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="settings_language" id="settings_language_es" value="es">
+                <label class="form-check-label" for="settings_language_es">
+                  {t('settings.language.spanish')}
+                </label>
+              </div>
+
+              <h6>{t('settings.numbering.title')}</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_numbering" id="settings_numbering_universal" value="universal">
+                <label class="form-check-label" for="settings_numbering_universal">
+                  {t('settings.numbering.universal')}
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_numbering" id="settings_numbering_fdi" value="fdi">
+                <label class="form-check-label" for="settings_numbering_fdi">
+                  {t('settings.numbering.fdi')}
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_numbering" id="settings_numbering_palmer" value="palmer">
+                <label class="form-check-label" for="settings_numbering_palmer">
+                  {t('settings.numbering.palmer')}
+                </label>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="settings_numbering" id="settings_numbering_field" value="field">
+                <label class="form-check-label" for="settings_numbering_field">
+                  {t('settings.numbering.field')}
+                </label>
+              </div>
+
+              <h6>{t('settings.imgpref.title')}</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_imgpref" id="settings_imgpref_mfh" value="mfh">
+                <label class="form-check-label" for="settings_imgpref_mfh">
+                  {t('settings.imgpref.mfh')}
+                </label>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="settings_imgpref" id="settings_imgpref_xray" value="xray">
+                <label class="form-check-label" for="settings_imgpref_xray">
+                  {t('settings.imgpref.xray')}
+                </label>
+              </div>
+
+              <h6>{t('settings.autopage.title')}</h6>
+              <small>{t('settings.autopage.text')}</small><br />
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_autopage" id="settings_autopage_true" value="true">
+                <label class="form-check-label" for="settings_autopage_true">
+                  {t('settings.autopage.enable')}
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="settings_autopage" id="settings_autopage_false" value="false">
+                <label class="form-check-label" for="settings_autopage_false">
+                  {t('settings.autopage.disable')}
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{t('settings.cancel')}</button>
+            <button type="button" class="btn btn-primary" id="btn-save-settings">{t('settings.save')}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmation-modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmation-header"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="confirmation-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="confirmation-btn-no"></button>
+            <button type="button" class="btn btn-primary" id="confirmation-btn-yes"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js" type="module"></script>
+</BaseLayout>

@@ -1,0 +1,97 @@
+---
+import { useTranslations, type SupportedLang } from '../lib/i18n';
+
+// Import vendor CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
+import 'node-snackbar/dist/snackbar.min.css';
+
+export interface Props {
+  title: string;
+  lang?: SupportedLang;
+}
+
+const { title, lang = 'en-US' } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <title>{title}</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+  <link rel="stylesheet" type="text/css" href="/css/app.css">
+
+  <!-- Load vendor dependencies FIRST - this must execute before app.js -->
+  <script src="../scripts/vendor-init.ts"></script>
+
+  <!-- Print styles -->
+  <style>
+    @media print {
+      .d-print-none {
+        display: none !important;
+      }
+      
+      .navbar,
+      .btn,
+      button,
+      .nav-tabs,
+      .navbar-text {
+        display: none !important;
+      }
+      
+      .tab-content {
+        border: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid d-flex h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top d-print-none">
+        <a class="navbar-brand" href="/">
+          <span>{t('splash.title')}</span> 
+          (<span id="app-version">0.1.7</span>)
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" 
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+          <div class="my-2 my-lg-0">
+            <a id="new-button" class="btn-new-case btn btn-light" href="#">{t('header.new')}</a>
+            <a id="open-button" class="btn-load-case btn btn-light" href="#">{t('header.open')}</a>
+            <a id="save-button" class="btn-save-case btn btn-light" href="#">{t('header.save')}</a>
+            <a id="settings-button" class="btn btn-light" href="#" data-toggle="modal" data-target="#settings-modal">{t('header.settings')}</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main">
+      <slot />
+    </main>
+
+    <footer>
+      <p class="text-center text-muted d-print-none">
+        &copy; {new Date().getFullYear()} {t('splash.title')}
+      </p>
+    </footer>
+  </div>
+
+  <!-- Hidden file input for opening cases -->
+  <input type="file" id="file-input" accept=".dta" style="display: none;">
+</body>
+</html>

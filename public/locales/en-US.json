@@ -1,0 +1,197 @@
+{
+	"title": "Subadult Dental Age Estimation (TADental)",
+	"technical": {
+		"right": "Right",
+		"left": "Left",
+		"maxillary": "Maxillary",
+		"mandibular": "Mandibular",
+		"permanent": "Permanent",
+		"deciduous": "Deciduous"
+	},
+	"menu": {
+		"mac-quit": "Quit",
+		"file": "File",
+		"file-new": "New",
+		"file-open": "Open",
+		"file-save": "Save",
+		"file-language": "Language",
+		"file-settings": "Settings",
+		"file-setup": "Re-run Setup",
+		"file-quit": "Quit",
+		"help": "Help",
+		"help-website": "Website",
+		"help-website-tsu": "TSU Website",
+		"help-website-msu": "MSU Website",
+		"help-source": "Source Code",
+		"help-issue": "Report an Issue",
+		"help-issue-text": "<!-- Please describe your issue and steps to reproduce it on the line below and leave the debugging information in tact. -->",
+		"help-updates": "Check for Updates",
+		"debug": "Debug",
+		"debug-reload": "Force Reload",
+		"debug-devtools": "Developer Tools",
+		"debug-appdata": "Show App Data",
+		"debug-delappdata": "Delete App Data",
+		"debug-delsettings": "Delete Settings"
+	},
+	"header": {
+		"new": "New",
+		"open": "Open",
+		"save": "Save"
+	},
+	"setup": {
+		"alert": "To begin using this program for analysis, the following must be setup.",
+		"choose-text": "Click the button below to choose a folder on your machine for the application runtime and analysis files to be stored.",
+		"choose-button": "Choose a Folder",
+		"current-path": "Current Location: ",
+		"setup-button": "Setup Application Runtime >",
+		"param-missing": "One or more required setup parameters is missing.",
+		"spinner": "Setting up the application..."
+	},
+	"splash": {
+		"title": "Subadult Dental Age Estimation",
+		"subtitle": "New Approaches to Juvenile Age Estimation in Forensics: Application of Transition Analysis via the Shackelford et al. Method to a Diverse Modern Subadult Sample",
+		"new": "New Case",
+		"open": "Open Case"
+	},
+	"tabs": {
+		"case": "Case Info",
+		"scoring": "Scoring",
+		"review": "Review",
+		"results": "Results",
+		"file": "File: "
+	},
+	"caseinfo": {
+		"number-label": "Case #",
+		"number-text": "A unique identifier for the data being scored.",
+		"date-label": "Observation Date",
+		"date-text": "The date the scoring of the teeth occurred.",
+		"analyst-label": "Analyst",
+		"analyst-text": "An identifier for the analyst performing the scoring.",
+		"memo-label": "Memo",
+		"memo-text": "Additional notes and information regarding the case.",
+		"scoring-button": "Enter Trait Scoring >"
+	},
+	"scoring": {
+		"permanent": "Permanent Dentition",
+		"deciduous": "Deciduous Dentition",
+		"case-button": "< Enter Case Info",
+		"review-button": "Review & Analyze >",
+		"select-tooth": "Click on a tooth in the chart to score it and view information",
+		"score": "Score"
+	},
+	"review": {
+		"title": "Current Scores",
+		"numbering": "#",
+		"set": "Set",
+		"jaw": "Jaw",
+		"side": "Side",
+		"tooth": "Tooth",
+		"score": "Score",
+		"remove": "remove",
+		"results-button": "Calculate Results",
+		"reset-button": "Reset",
+		"reset-all-button": "Reset All",
+		"analyze-button": "Calculate Results"
+	},
+	"results": {
+		"title": "Analysis Results",
+		"case": "Case #",
+		"date": "Observation Date",
+		"analyst": "Analyst",
+		"predicted": "Predicted: ",
+		"year": "year",
+		"percentage": "Prediction %",
+		"lower": "Lower: ",
+		"upper": "Upper: ",
+		"scores": {
+			"title": "Scored Traits",
+			"code": "Code",
+			"value": "Value"
+		},
+		"default": "Default",
+		"bounds": {
+			"title": "CI Bounds"
+		},
+		"clear-button": "Clear Current Scores",
+		"clear-all-button": "Clear All Information",
+		"export-pdf-button": "Export",
+		"statistics": "Statistics",
+		"mu": "Mu",
+		"within": "Within",
+		"between": "Between",
+		"prediction-table": "Predictions",
+		"confidence": "Confidence"
+	},
+	"dialog": {
+		"open": {
+			"title": "Open TADental File",
+			"button": "Open DTA File",
+			"filter": "TADental"
+		},
+		"save": {
+			"title": "Save TADental File",
+			"button": "Save DTA File",
+			"filter": "TADental"
+		},
+		"folder": {
+			"title": "Open Folder",
+			"button": "Choose Folder"
+		},
+		"save-pdf": {
+			"title": "Save TADental PDF Export",
+			"button": "Save PDF File",
+			"filter": "PDF File"
+		}
+	},
+	"default-file-name": "untitled.dta",
+	"settings": {
+		"title": "Settings",
+		"cancel": "Cancel",
+		"save": "Save Settings",
+		"numbering": {
+			"title": "Tooth Numbering System",
+			"universal": "Universal",
+			"fdi": "FDI",
+			"palmer": "Palmer",
+			"field": "Analysis Fields"
+		},
+		"imgpref": {
+			"title": "Scoring Images",
+			"mfh": "Moorrees, Fanning and Hunt (MFH)",
+			"xray": "X-Ray"
+		},
+		"autopage": {
+			"title": "Auto-advance Scoring",
+			"disable": "Disable",
+			"enable": "Enable",
+			"text": "Enabling this option will automatically advance to the next tooth once a score is set."
+		}
+	},
+	"alerts": {
+		"setup-no-folder": "Please select a folder to continue.",
+		"setup-choose-folder": "Choose",
+		"setup-complete": "Setup is Complete!",
+		"case-info-missing-case-number": "Please enter a Case # to continue.",
+		"analysis-no-input-file": "There was an error generating the input file.",
+		"installing-runtime": "Setting up the application's runtime...",
+		"running-analysis": "Running the analysis...",
+		"export": {
+			"pending": "Please wait while the PDF file is being exported.",
+			"error": "There was an issue exporting the PDF file. Please select a folder and provide a name for the file.",
+			"complete": "The PDF file has been exported successfully.",
+			"view": "View PDF"
+		}
+	},
+	"confirmation": {
+		"btn-yes": "Yes",
+		"btn-no": "No",
+		"reset": {
+			"header": "Clear Current Scores?",
+			"body": "Warning! You are about to clear all current scores. Would you like to proceed?"
+		},
+		"reset-all": {
+			"header": "Clear All Information?",
+			"body": "Warning! You are about to clear all the information, including current scores and case information. Would you like to proceed?"
+		}
+	}
+}

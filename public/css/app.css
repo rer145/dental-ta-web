@@ -1,0 +1,226 @@
+:root {
+	--primary: #041E42 !important;
+	/* --secondary: #6c757d !important; */
+	--secondary: #5386e4 !important;
+	--success: #4a5240 !important;
+	--light: #f1fffa !important;
+	--dark: #d5c7bc !important;
+}
+
+.bg-primary {
+	background-color: var(--primary) !important;
+	color: #fff !important;
+}
+
+.btn-primary {
+	background-color: var(--primary) !important;
+	color: #fff !important;
+}
+.btn-outline-primary {
+	color: var(--primary) !important;
+	border: 1px solid var(--primary) !important;
+}
+
+.btn-secondary {
+	background-color: var(--white) !important;
+	color: var(--primary) !important;
+}
+
+
+.nav-link {
+	color: var(--primary) !important;
+}
+
+.nav-link.active {
+	/* border-bottom: 2px solid var(--primary) !important; */
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+[class*=" bmd-label"], [class^=bmd-label],
+.is-focused [class*=" bmd-label"], .is-focused [class^=bmd-label] {
+	color: var(--primary) !important;
+}
+
+.table .thead-dark th {
+	background-color: var(--primary) !important;
+	color: #fff !important;
+	border-color: var(--primary) !important;
+}
+
+.tooltip > .tooltip-inner {
+	background-color: var(--primary) !important;
+	color: var(--white) !important;
+}
+
+.tooltip > .arrow {
+	border-bottom-color: var(--primary) !important;
+}
+
+
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	display: -ms-flexbox;
+	display: -webkit-box;
+	display: flex;
+	-ms-flex-pack: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	background-color: #dddddd;
+	background-image: url("../images/bg.png");
+}
+
+header {
+	margin-bottom: 3rem;
+}
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+	box-shadow: inset 0 -1px 0 #ddd !important;
+}
+
+g.spots polygon[data-disabled="false"],
+g.spots path[data-disabled="false"],
+text[data-disabled="false"] {
+	cursor: pointer;
+}
+
+g.spots polygon,
+g.spots path {
+	-webkit-transition: fill .25s;
+	transition: fill .25s;
+}
+
+g.spots polygon[data-disabled="false"]:hover,
+g.spots polygon[data-disabled="false"]:active,
+g.spots path[data-disabled="false"]:hover,
+g.spots path[data-disabled="false"]:active,
+g.spots polygon[data-disabled="false"].active,
+g.spots path[data-disabled="false"].active {
+	fill: var(--dark) !important;
+}
+
+g.spots polygon[data-disabled="false"].scored,
+g.spots path[data-disabled="false"].scored {
+	fill: var(--secondary) !important;
+}
+
+.tooth-scoring-help-item {
+	cursor: pointer;
+	border: 1px solid #6c757d;
+}
+.tooth-scoring-help-item.bg-primary,
+.tooth-scoring-help-item:hover {
+	border: 1px solid #000;
+}
+.tooth-scoring-help-item img {
+	width: 100px;
+	height: 100px;
+}
+
+
+
+.btn-splash-new {
+	background-color: var(--secondary) !important;
+	color: var(--light);
+}
+
+.btn-splash-load {
+	background-color: var(--light) !important;
+	color: #000 !important;
+}
+
+
+
+.dtp-header {
+	background: var(--primary) !important;
+	margin-bottom: 0 !important;
+}
+
+.dtp-date,
+.dtp table.dtp-picker-days tr > td > a.selected {
+	background-color: var(--primary) !important;
+}
+
+.dtp .p10 > a {
+	color: #fff !important;
+	font-weight: bold;
+}
+
+.dtp div.dtp-actual-year {
+	color: #fff !important;
+}
+
+.year-picker-item.active {
+	color: var(--primary) !important;
+}
+.year-picker-item:hover {
+	color: var(--secondary) !important;
+}
+
+
+#spinner {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	padding: 10% 5%;
+	width: 95%;
+	height: 95%;
+	border: 2px solid #000;
+	background-color: var(--secondary);
+	color: var(--light);
+	font-size: 24px;
+	text-align: center;
+}
+
+#spinner span {
+	-moz-animation-name: spin;
+	-moz-animation-duration: 2000ms;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: linear;
+	-webkit-animation-name: spin;
+	-webkit-animation-duration: 2000ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-ms-animation-name: spin;
+	-ms-animation-duration: 2000ms;
+	-ms-animation-iteration-count: infinite;
+	-ms-animation-timing-function: linear;
+	animation-name: spin;
+	animation-duration: 2000ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+@-moz-keyframes spin {
+	from { -moz-transform: rotate(0deg); }
+	to { -moz-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+	from { -webkit-transform: rotate(0deg); }
+	to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
