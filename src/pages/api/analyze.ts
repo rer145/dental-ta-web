@@ -28,8 +28,8 @@ export const POST: APIRoute = async ({ request }) => {
   // await new Promise(resolve => setTimeout(resolve, 1000));
 
   // let url = `http://localhost:8000/tada?dc=2&dm1=3&dm2=2&UI1=&UI2=&LI1=&LI2=&C=&P3=&P4=&M1=&M2=&M3=`;
-  let url = `http://localhost:8000/tada?`;
-  // let url = `https://tada-api-1-0-0.onrender.com/tada?`;
+  // let url = `http://localhost:8000/tada?`;
+  let url = `https://tada-api-1-0-0.onrender.com/tada?`;
   url += `dc=${data.scores.dc}&`;
   url += `dm1=${data.scores.dm1}&`;
   url += `dm2=${data.scores.dm2}&`;
