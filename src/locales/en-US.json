@@ -170,6 +170,11 @@
 			"disable": "Disable",
 			"enable": "Enable",
 			"text": "Enabling this option will automatically advance to the next tooth once a score is set."
+		},
+		"language": {
+			"title": "Language",
+			"english": "English",
+			"spanish": "Spanish"
 		}
 	},
 	"alerts": {

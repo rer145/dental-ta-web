@@ -69,8 +69,8 @@ const t = useTranslations(lang);
                     <span class="bmd-help">{t('caseinfo.number-text')}</span>
                   </div>
                   <div class="form-group">
-                    <label for="observation_date_input" class="bmd-label-floating">{t('caseinfo.date-label')}</label>
-                    <input type="text" id="observation_date_input" class="form-control" />
+                    <label for="observation_date_input" class="bmd-label-static">{t('caseinfo.date-label')}</label>
+                    <input type="date" id="observation_date_input" class="form-control" />
                     <span class="bmd-help">{t('caseinfo.date-text')}</span>
                   </div>
                   <div class="form-group">
@@ -191,85 +191,64 @@ const t = useTranslations(lang);
           <!-- Results Tab -->
           <section id="tab-pane-results-info" class="tab-pane" role="tabpanel" aria-labelledby="tab-results-info">
             <div class="row mb-2">
-              <div class="col-sm-12 mb-5">
+              <div class="col-sm-4">
                 <div class="card mb-2">
                   <div class="card-body">
-                    <h3>{t('results.title')}</h3>
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <p><strong>{t('results.case-number')}</strong> <span id="results-case-number"></span></p>
-                        <p><strong>{t('results.observation-date')}</strong> <span id="results-observation-date"></span></p>
-                        <p><strong>{t('results.analyst')}</strong> <span id="results-analyst"></span></p>
-                      </div>
-                      <div class="col-sm-6">
-                        <table id="results-score-table" class="table table-sm">
-                          <tbody></tbody>
-                        </table>
-                      </div>
+                    <button class="export-pdf-button btn btn-outline-success active float-right d-print-none">{t('results.export-pdf-button')}</button>
+										<h2>{t('results.title')}</h2>
+                    <div class="d-none d-print-block">
+                      <p>
+                        <strong>{t('results.case-number')}</strong> <span id="results-case-number"></span><br />
+                        <strong>{t('results.observation-date')}</strong> <span id="results-observation-date"></span><br />
+                        <strong>{t('results.analyst')}</strong> <span id="results-analyst"></span><br />
+                      </p>
+                      <hr />
                     </div>
-
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <h5>{t('results.prediction')}</h5>
-                        <p class="display-4"><span id="results-prediction"></span></p>
-                        <!-- <div class="form-group">
-                          <label for="prediction-perc">{t('results.confidence')}</label>
-                          <select id="prediction-perc" class="form-control">
-                            <option value="90">90%</option>
-                            <option value="95" selected>95%</option>
-                            <option value="99">99%</option>
-                          </select>
-                        </div>
-                        <p>
-                          <strong>{t('results.range')}</strong>
-                          <span id="results-lower"></span> - <span id="results-upper"></span> {t('results.years')}
-                        </p> -->
-                      </div>
-                      <div class="col-sm-6">
-                        <h5>{t('results.statistics')}</h5>
-                        <div class="form-group">
-                          <label for="results-mu">{t('results.mu')}</label>
-                          <input type="text" id="results-mu" class="form-control" readonly />
-                        </div>
-                        <div class="form-group">
-                          <label for="results-w">{t('results.within')}</label>
-                          <input type="text" id="results-w" class="form-control" readonly />
-                        </div>
-                        <div class="form-group">
-                          <label for="results-b">{t('results.between')}</label>
-                          <input type="text" id="results-b" class="form-control" readonly />
-                        </div>
-                      </div>
+                    <h5>{t('results.predicted')}</h5><h5 id="results-prediction" class="font-weight-bold"></h5>
+                    <div class="form-group d-print-none">
+                      <h2>{t('results.bounds.title')}</h2>
+                      <table id="results-prediction-table" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th>%</th>
+                            <th>{t('results.lower')}</th>
+                            <th>{t('results.upper')}</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
                     </div>
-
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <h5>{t('results.prediction-table')}</h5>
-                        <table id="results-prediction-table" class="table">
-                          <thead>
-                            <tr>
-                              <th>{t('results.confidence')}</th>
-                              <th>{t('results.lower')}</th>
-                              <th>{t('results.upper')}</th>
-                            </tr>
-                          </thead>
-                          <tbody></tbody> 
-                        </table>
-                      </div>
-                    </div>
-
-                    <div id="results-images" class="row"></div>
+										<div class="card mb-2 d-print-none">
+											<div class="card-body">
+												<p class="text-center">
+													<button class="reset-button btn btn-outline-danger" >{t('results.clear-button')}</button>
+													<button class="reset-all-button btn btn-outline-danger">{t('results.clear-all-button')}</button>
+												</p>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h2>{t('results.scores.title')}</h2>
+												<table id="results-score-table" class="table table-striped table-hover">
+													<thead class="thead-dark">
+														<tr>
+															<th>{t('results.scores.code')}</th>
+															<th>{t('results.scores.value')}</th>
+														</tr>
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
+										</div>
                   </div>
                 </div>
-
-                <p class="text-center d-print-none">
-                  <button class="export-pdf-button btn btn-outline-primary">{t('results.export-pdf')}</button>
-                </p>
-
-                <div class="d-none d-print-block">
-                  <p class="text-center">
-                    <small>{t('results.exported-on')}: <span id="results-export-on"></span></small>
-                  </p>
+              </div>
+              <div class="col-sm-8">
+                <div class="card">
+                  <div class="card-body">
+                    <pre id="debug-output" style="display: none; padding: 5px; border:2px solid #000; background-color: #ddd;"></pre>
+                    <div id="results-images"></div>
+                  </div>
                 </div>
               </div>
             </div>

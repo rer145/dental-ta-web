@@ -25,9 +25,6 @@ import 'bootstrap-material-design';
 import Snackbar from 'node-snackbar/src/js/snackbar.js';
 window.Snackbar = Snackbar;
 
-// Note: bootstrap-material-datetimepicker is not used in this application
-// The observation_date_input is a plain text field, not a datetimepicker
-
 // Initialize Bootstrap Material Design when DOM is ready
 $(function() {
   // @ts-ignore - bootstrapMaterialDesign is added by bootstrap-material-design

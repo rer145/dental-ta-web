@@ -566,11 +566,13 @@ function parse_output(data) {
   let inputs = data.inputs[0];
   Object.keys(inputs).forEach(key => {
     if (inputs.hasOwnProperty(key)) {
-      const row = $("<tr></tr>");
-      const cell_code = $("<td></td>").html(`${key}`);
-      const cell_value = $("<td></td>").html(`${inputs[key]}`);
-      row.append(cell_code).append(cell_value);
-      $("#results-score-table tbody").append(row);
+      if (key != 'Obs' && key != 'Neander') {
+        const row = $("<tr></tr>");
+        const cell_code = $("<td></td>").html(`${key}`);
+        const cell_value = $("<td></td>").html(`${inputs[key]}`);
+        row.append(cell_code).append(cell_value);
+        $("#results-score-table tbody").append(row);
+      }
     }
   });
   
